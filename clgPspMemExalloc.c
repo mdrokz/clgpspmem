@@ -2,7 +2,7 @@
 
 #include "clgpspmem_internal.h"
 
-static ClgMemOptParams st_default_params = { "CLGPSPMEM", CLGPSPMEM_USER, 0, CLGMEM_LO, NULL };
+static ClgPspMemOptParams st_default_params = { "CLGPSPMEM", CLGPSPMEM_USER, 0, CLGPSPMEM_LO, NULL };
 
 void *clgPspMemExalloc( SceSize size, ClgPspMemOptParams *opt )
 {
@@ -20,19 +20,19 @@ void *clgPspMemExalloc( SceSize size, ClgPspMemOptParams *opt )
 	if( ! is_valid_uid( mb_uid ) ) return NULL;
 	
 	/* メモリアドレスを取得すると同時に、ブロックIDを記録するエリア分ずらす */
-	mb_head = (void *)( (uintptr)sceKernelGetBlockHeadAddr( mb_uid ) + sizeof( SceUID ) );
+	mb_head = (void *)( (uintptr_t)sceKernelGetBlockHeadAddr( mb_uid ) + sizeof( SceUID ) );
 	
 	/* アライメントを調整 */
-	if( align ){
-		if( ! PSPMM_POWER_OF_TWO( align ) ){
+	if( opt->Boundary ){
+		if( ! CLGPSPMEM_POWER_OF_TWO( opt->Boundary ) ){
 			sceKernelFreePartitionMemory( mb_uid );
 			return NULL;
 		}
-		mb_head = (void *)CLGPSPMEM_ALIGN_ADDR( align, mb_head );
+		mb_head = (void *)CLGPSPMEM_ALIGN_ADDR( opt->Boundary, mb_head );
 	}
 	
 	/* 最終的に返すメモリアドレスから、ずらしたエリア分戻ってブロックIDを記録 */
-	*( (SceUID *)( (uintptr)mb_head - sizeof( SceUID ) ) = mb_uid;
+	*( (SceUID *)( (uintptr_t)mb_head - sizeof( SceUID ) ) ) = mb_uid;
 	
 	return mb_head;
 }

@@ -4,6 +4,6 @@
 
 void clgPspMemFree( void *ptr )
 {
-	SceUID mb_uid = *( (SceUID *)( (intptr)ptr - sizeof( SceUID ) ) );
+	SceUID mb_uid = *( (SceUID *)( (intptr_t)ptr - sizeof( SceUID ) ) );
 	sceKernelFreePartitionMemory( mb_uid );
 }

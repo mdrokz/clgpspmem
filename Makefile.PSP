@@ -1,0 +1,12 @@
+TARGET = clgpspmem
+
+CFLAGS  ?= -Os -G0 -Wall -fno-strict-aliasing
+ASFLAGS ?= $(CFLAGS)
+LDFLAGS ?= 
+
+INCDIR = ../clgcommon
+
+OBJS = $(patsubst %.c,%.o,$(wildcard *.c))
+
+PSPSDK = $(shell psp-config --pspsdk-path)
+include ../clgcommon/build.mak

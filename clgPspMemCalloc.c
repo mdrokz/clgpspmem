@@ -1,6 +1,7 @@
 /* clgPspMemCalloc.c */
 
 #include "clgpspmem_internal.h"
+#include <string.h>
 
 void *clgPspMemCalloc( uint count, SceSize size )
 {
@@ -21,7 +22,7 @@ void *clgPspMemCalloc( uint count, SceSize size )
 	if( total_size / size != count ) return NULL;
 	
 	ptr = clgPspMemAlloc( total_size );
-	if( ptr ) sceKernelMemset( ptr, 0, total_size );
+	if( ptr ) memset( ptr, 0, total_size );
 	
 	return ptr;
 }

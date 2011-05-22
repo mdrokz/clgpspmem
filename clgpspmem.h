@@ -8,7 +8,7 @@
 #define CLGPSPMEM_H
 
 #include <pspkernel.h>
-#include "clg.h"
+#include "../clgcommon/clg.h"
 
 /*=========================================================
 	マクロ
@@ -58,7 +58,7 @@ typedef enum ClgPspMemAllocType {
 typedef struct ClgPspMemOptParams
 {
 	/** メモリブロックに付ける名前。sceKernelSearchUIDByName()などで使用するらしいがよくわからない。*/
-	String             Name; 
+	ClgStr             Name; 
 	/** 確保するパーティションID。*/
 	int                Partition;
 	/** メモリのアライメント。0で自動。*/
@@ -92,7 +92,7 @@ void *clgPspMemExalloc( SceSize size, ClgPspMemOptParams *opt );
  * @param size - 確保するメモリサイズ。
  * @return < 0 でエラー。
  */
-#define clgPspMemAlloc( size ) clgMemExalloc( size, NULL )
+#define clgPspMemAlloc( size ) clgPspMemExalloc( size, NULL )
 
 /**
  * メモリを確保して領域をゼロクリア。
