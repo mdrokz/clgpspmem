@@ -3,7 +3,7 @@
 #include "clgpspmem_internal.h"
 #include <string.h>
 
-void *clgPspMemCalloc( uint count, SceSize size )
+void *clgPspMemCalloc( unsigned int count, SceSize size )
 {
 	void *ptr;
 	SceSize total_size;

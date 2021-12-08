@@ -101,7 +101,7 @@ void *clgPspMemExalloc( SceSize size, ClgPspMemOptParams *opt );
  * @param size - 一要素のサイズ。
  * @return NULLでエラー。
  */
-void *clgPspMemCalloc( uint count, SceSize size );
+void *clgPspMemCalloc( unsigned int count, SceSize size );
 
 /**
  * 指定バウンダリでアライメントされたメモリアドレスを確保。
@@ -110,7 +110,7 @@ void *clgPspMemCalloc( uint count, SceSize size );
  * @param size - 確保するサイズ。
  * @return NULLでエラー。
  */
-void *clgPspMemAlign( uint boundary, SceSize size );
+void *clgPspMemAlign( unsigned int boundary, SceSize size );
 
 /**
  * 確保したメモリを解放。
